@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #000000;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.slider {
+    .slider-wraper {
+        .swiper {
+            .swiper-pagination {
+                bottom: 30px;
+                padding-top: 40px;
+                .swiper-pagination-bullet {
+                    width: 15px;
+                    height: 15px;
+                    margin-right: 20px;
+                    background-color: #f1efef;
+                }
+                .swiper-pagination-bullet-active {
+                    background-color: #C31C22;
+                }
+            }
+        }
+    }
+}
+
+/* slider cards */
+.slider-cards{
+    .container{
+        .slider-cards-wraper{
+            .swiper{
+                padding: 0 40px;
+                .swiper-button-prev{
+                    color: #FFF;
+                    left: 0;
+                    &::after{
+                       font-size: 30px;
+                    }
+                }
+                .swiper-button-next{
+                    right: 0;
+                    color: #FFF;
+                    &::after{
+                        font-size: 30px;
+                     }
+                }
+            }
+        }
+    }
+}
+
+//details page
+.page{
+    .social{
+      display: none;
+    }
+}
+
+@layer components {
+    .container{
+        width: 95%;
+        margin: auto;
+    }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 15px 40px;
+        margin: 30px 40px 0 0;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 30px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 500;
+        font-family: "Roboto", sans-serif;
+        cursor: pointer;
+    }
+    .social {
+        width: 50px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        right: 20px;
+        top: 55%;
+        margin-top: -100px;
+        z-index: 99;
+        text-align: center;
+    }
+
+    .social::before {
+        content: "";
+        width: 0.5px;
+        height: 130px;
+        background-color: rgba(248, 248, 248, 0.5);
+        position: absolute;
+        top: -150px;
+    }
+    .social::after {
+        content: "";
+        width: 0.5px;
+        height: 170px;
+        background-color: rgb(238, 238, 238, 0.5);
+        position: absolute;
+        bottom: -180px;
+    }
+}
