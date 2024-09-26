@@ -1,7 +1,7 @@
 const navLinks = [
     {name:"Home", path: "#"},
     {name:"Movies", path: "#"},
-    {name:"Series", path: "#"},
+    {name:"Popular", path: "#"},
     {name:"My List", path: "#"},
 ]
 

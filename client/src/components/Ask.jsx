@@ -27,8 +27,8 @@ export const Ask = () => {
   ];
 
   return (
-    <div className="w-[80%] mx-auto ">
-      <h1 className="text-5xl text-white text-center font-medium mt-[200px] mx-0 m-[50px]">Frequently Asked Questions</h1>
+    <div className="xl:w-[80%] w-[95%] mx-auto ">
+      <h1 className="xl:text-5xl text-3xl text-white text-center font-medium mt-[200px] mx-0 m-[50px]">Frequently Asked Questions</h1>
       <ul>
         {questions.map((question, index) => (
           <li className="m-3" key={index}>
@@ -52,7 +52,7 @@ export const Ask = () => {
                   : { display: "none" }
               }
             >
-              <span className="text-xl text-white">
+              <span className="lg:text-xl text-lg text-white">
                 <p>{question.body}</p>
               </span>
             </div>

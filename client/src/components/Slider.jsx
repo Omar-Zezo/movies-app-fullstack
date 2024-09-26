@@ -31,12 +31,13 @@ const Slider = ({ data, internal }) => {
                     <div className="w-full h-full relative" style={{
                       background: `url('https://image.tmdb.org/t/p/w1280${trend.backdrop_path}')`,
                       backgroundSize: "cover",
+                      backgroundPosition: "center",
                       backgroundRepeat: "no-repeat"
                       }}>
                       <div className="w-full h-full absolute top-0 left-0 z-10 block bg-bgOverlay">
                         <div className="w-full absolute top-[70%] translate-y-[-70%] text-slate-100 pl-8">
-                          <h2 className="w-[85%] text-5xl tracking-wider uppercase m-0 p-0">{trend.title}</h2>
-                          <p className="text-base leading-6 w-[50%] font-medium text-slate-100 mt-10">{trend.overview}</p>
+                          <h2 className="w-[85%] text-3xl xl:text-5xl tracking-wider uppercase m-0 p-0">{trend.title}</h2>
+                          <p className="text-base xl:leading-6 leading-5 xl:w-[50%] w-[90%] font-medium text-slate-100 mt-10">{trend.overview}</p>
                           <div>
                              <Link className="bg-mainColor btn" to= {`movie/${trend.id}`}>
                               <img src={Play} alt="play" className="w-5 mr-2"/>
@@ -56,7 +57,7 @@ const Slider = ({ data, internal }) => {
           </Swiper>
         </div>
         {/* social icons */}
-        <div className="social">
+        <div className="social max-xl:hidden">
           <a href="">
             <img className="size-9" src={Facebook} alt="facebook" />
           </a>
