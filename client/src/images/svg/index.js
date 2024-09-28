@@ -5,6 +5,7 @@ import Twitter from "./twitter.svg";
 import Instagram from "./instagram.svg";
 import Search from './search.svg'
 import Bell from './notification.svg'
+import Edit from './edit.svg'
 
 
-export {Play, Plus, Facebook, Twitter, Instagram, Search, Bell}
+export {Play, Plus, Facebook, Twitter, Instagram, Search, Bell, Edit}

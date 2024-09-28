@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 // import required modules
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 
 const Slider = ({ data, internal }) => {
   return (
@@ -18,11 +18,12 @@ const Slider = ({ data, internal }) => {
       <div className="h-[700px] slider">
         <div className="w-full h-full slider-wraper">
           <Swiper
-            direction={"horizontal"}
             pagination={{
               clickable: true,
             }}
-            modules={[Pagination]}
+            autoplay={true}
+            loop={true}
+            modules={[Pagination, Autoplay]}
             className="mySwiper w-full h-full"
           >
             {data.length > 0

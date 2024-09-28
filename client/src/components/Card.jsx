@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({data}) => {
+  console.log(data)
   return (
     <div className="w-full h-[300px] rounded-sm" onClick={()=> console.log(data)}>
       <Link to={`/movie/${data.id}`}>

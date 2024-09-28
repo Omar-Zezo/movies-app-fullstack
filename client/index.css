@@ -17,13 +17,13 @@ body {
   padding-top: 40px;
 }
 .slider .slider-wraper .swiper .swiper-pagination .swiper-pagination-bullet {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   margin-right: 20px;
   background-color: #f1efef;
 }
 .slider .slider-wraper .swiper .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #C31C22;
+  background-color: #1679AB;
 }
 
 /* slider cards */

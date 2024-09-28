@@ -2,6 +2,7 @@ import React from "react";
 import { Logo } from "../images/imgs";
 import { Bell, Search } from "../images/svg";
 import { navLinks } from "../constants";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
             {
               navLinks.map(link=>(
             <li key={link.name} className="mr-12">
-              <a href={link.path} className="text-white text-base font-medium capitalize last-of-type:mr-0 hover:text-mainColor">{link.name}</a>
+              <Link to={link.path} className="text-white text-base font-medium capitalize last-of-type:mr-0 hover:text-mainColor">{link.name}</Link>
             </li>
               ))
             }
@@ -27,9 +28,9 @@ const Navbar = () => {
             <img src={Search} alt="search" className="w-6 mr-10 last-of-type:mr-0 cursor-pointer"/>
             <img src={Bell} alt="bell" className="w-6 mr-0 cursor-pointer"/>
           </div>
-          <a className="ml-auto bg-mainColor rounded-lg xl:px-5 xl:py-2 py-1 px-3 text-white text-base font-medium capitalize" href="pages/login.html">
+          <Link className="ml-auto bg-mainColor rounded-lg xl:px-5 xl:py-2 py-1 px-3 text-white text-base font-medium capitalize" to="/user/login">
             sign in
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
