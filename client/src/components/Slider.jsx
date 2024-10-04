@@ -15,7 +15,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 const Slider = ({ data, internal }) => {
   return (
     <>
-      <div className="h-[700px] slider">
+      <div className="h-[750px] slider">
         <div className="w-full h-full slider-wraper">
           <Swiper
             pagination={{

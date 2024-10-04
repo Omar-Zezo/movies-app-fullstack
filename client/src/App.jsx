@@ -13,6 +13,7 @@ import Discover from "./pages/Discover";
 import TopRated from "./pages/TopRated";
 import Upcoming from "./pages/Upcoming";
 import SearchPage from "./pages/SearchPage";
+import Wishlist from "./pages/Wishlist";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="search" element={<SearchPage/>}/>
         <Route path="movie/:id" element={<DetailsPage/>}/>
         <Route path="profile" element={<Profile/>}/>
+        <Route path="wishlist" element={<Wishlist/>}/>
       </Route>
       <Route path="/user">
         <Route path="login" element={<Login/>}/>
