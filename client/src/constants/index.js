@@ -1,8 +1,8 @@
 const navLinks = [
     {name:"Home", path: "/"},
-    {name:"Movies", path: "#"},
-    {name:"Popular", path: "#"},
-    {name:"My List", path: "#"},
+    {name:"Discover", path: "/movies"},
+    {name:"Upcoming", path: "/upcoming"},
+    {name:"Top Rated", path: "/top-rated"},
 ]
 
 export {navLinks}

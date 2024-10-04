@@ -6,23 +6,23 @@ export const Ask = () => {
   const questions = [
     {
       id: 0,
-      title: "What is Netflix?",
-      body: "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
+      title: "What is Movrec?",
+      body: "Movrec is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
     },
     {
       id: 1,
-      title: "How much does Netflix cost?",
-      body: "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from EGP120 to EGP200 a month. No extra costs, no contracts.",
+      title: "How much does Movrec cost?",
+      body: "Watch Movrec on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from EGP120 to EGP200 a month. No extra costs, no contracts.",
     },
     {
       id: 2,
       title: "Where can I Watch?",
-      body: "Watch anywhere, anytime, on an unlimited number of devices. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles.",
+      body: "Watch anywhere, anytime, on an unlimited number of devices. Sign in with your Movrec account to watch instantly on the web at Movrec.com from your personal computer or on any internet-connected device that offers the Movrec app, including smart TVs, smartphones, tablets, streaming media players and game consoles.",
     },
     {
       id: 3,
-      title: "What can I Watch on Netflix?",
-      body: "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want.",
+      title: "What can I Watch on Movrec?",
+      body: "Movrec has an extensive library of feature films, documentaries, TV shows, anime, award-winning Movrec originals, and more. Watch as much as you want, anytime you want.",
     },
   ];
 

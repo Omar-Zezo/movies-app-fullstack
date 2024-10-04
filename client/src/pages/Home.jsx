@@ -1,36 +1,51 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../utils/Navbar";
 import Slider from "../components/Slider";
 import SliderCards from "../components/SliderCards";
 import { Ask } from "../components/Ask";
 import Subscription from "../components/Subscription";
-import axios from "axios"
+import { getTopRated, getPopular, getUpcoming } from "../redux/actions/movieActions";
+import {useSelector, useDispatch} from "react-redux"
 
 const Home = () => {
   const [popularList, setPopularList] = useState([])
   const [topRated, setTopRatedList] = useState([])
   const [upcomingList, setUpcomingList] = useState([])
 
-  const getData = async()=>{
-    // get movies list
-    await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=2d1450a575e2dcacc1d2e19b768fdfdf&language=en-US&page=1").then((movies)=>{
-      setPopularList(movies.data.results)
-    })
-    // get top rated list
-    await axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=2d1450a575e2dcacc1d2e19b768fdfdf&language=en-US&page=1").then((tv)=>{
-      setTopRatedList(tv.data.results)
-    })
-    // get upcoming list
-    await axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=2d1450a575e2dcacc1d2e19b768fdfdf&language=en-US&page=1").then((tv)=>{
-      setUpcomingList(tv.data.results)
-    })
-  }
+  const topRatedData = useSelector(state=>state.movieReducer.topRated)
+  const popularData = useSelector(state=>state.movieReducer.popular)
+  const upcomingData = useSelector(state=>state.movieReducer.upcoming)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    if(topRatedData){
+      if(topRatedData.data){
+        setTopRatedList(topRatedData.data.results)
+      }
+    }
+  },[topRatedData])
+
+  useEffect(()=>{
+    if(popularData){
+      if(popularData.data){
+        setPopularList(popularData.data.results)
+      }
+    }
+  },[popularData])
+
+  useEffect(()=>{
+    if(upcomingData){
+      if(upcomingData.data){
+        setUpcomingList(upcomingData.data.results)
+      }
+    }
+  },[upcomingData])
 
 
   useEffect(()=>{
-    getData()
+    dispatch(getTopRated(1))
+    dispatch(getPopular(1))
+    dispatch(getUpcoming(1))
   },[])
-
 
 
   return (

@@ -8,6 +8,11 @@ import ForgotPassword from "./pages/user/ForgotPassword";
 import VerificationCode from "./pages/user/VerificationCode";
 import ResetPassword from "./pages/user/ResetPassword";
 import { Profile } from "./pages/user/Profile";
+import ScrollToTop from "./utils/ScrollToTop";
+import Discover from "./pages/Discover";
+import TopRated from "./pages/TopRated";
+import Upcoming from "./pages/Upcoming";
+import SearchPage from "./pages/SearchPage";
 
 
 function App() {
@@ -15,9 +20,14 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <ScrollToTop>
       <Routes>
       <Route path="/" Component={Layout}>
         <Route index element={<Home/>}/>
+        <Route path="movies" element={<Discover/>}/>
+        <Route path="top-rated" element={<TopRated/>}/>
+        <Route path="upcoming" element={<Upcoming/>}/>
+        <Route path="search" element={<SearchPage/>}/>
         <Route path="movie/:id" element={<DetailsPage/>}/>
         <Route path="profile" element={<Profile/>}/>
       </Route>
@@ -29,6 +39,7 @@ function App() {
         <Route path="reset-password" element={<ResetPassword/>}/>
       </Route>
       </Routes>
+      </ScrollToTop>
       </BrowserRouter>
     </div>
   )

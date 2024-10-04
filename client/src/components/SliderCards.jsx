@@ -17,7 +17,7 @@ const SliderCards = ({ title, data }) => {
     <div className="mt-[100px] slider-cards">
       <div className="container">
         <div className="slider-cards-wraper">
-          <h2 class="text-white py-10 pr-0 pl-10 text-3xl font-medium">{title}</h2>
+          <h2 className="text-white py-10 pr-0 pl-10 text-3xl font-medium">{title}</h2>
           <Swiper
             className="mySwiper py-0 px-10"
             modules={[Navigation]}
@@ -42,7 +42,7 @@ const SliderCards = ({ title, data }) => {
             {
               data.length > 0 ? (
                 data.map((item) => (
-                  <SwiperSlide>
+                  <SwiperSlide key={item.id}>
                     <Card data={item}/>
                   </SwiperSlide>
                 ))
