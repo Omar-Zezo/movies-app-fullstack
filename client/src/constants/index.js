@@ -2,7 +2,7 @@ import { Heart, Home } from "../images/svg"
 
 const navLinks = [
     {name:"Home", path: "/"},
-    {name:"Discover", path: "/movies"},
+    {name:"Discover", path: "/discover"},
     {name:"Upcoming", path: "/upcoming"},
     {name:"Top Rated", path: "/top-rated"},
 ]
@@ -20,5 +20,15 @@ const navigationBar = [
     },
 ]
 
+const setRatingColor = (rating)=>{
+    if(rating <= 40){
+      return `border-red-500`
+    }else if(rating > 40 && rating <= 65){
+      return "border-orange-500"
+    }else{
+      return "border-green-700"
+    }
+  }
 
-export {navLinks, navigationBar}
+
+export {navLinks, navigationBar, setRatingColor}

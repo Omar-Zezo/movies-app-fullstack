@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Ask = () => {
+const Ask = () => {
   const [questionId, setQuestionId] = useState("");
 
   const questions = [
@@ -62,3 +62,5 @@ export const Ask = () => {
     </div>
   );
 };
+
+export default Ask

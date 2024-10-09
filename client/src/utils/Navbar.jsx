@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, SearchIcon } from "../images/svg";
 import { navLinks } from "../constants";
 import { Link } from "react-router-dom";
-import { Logo } from "../images/imgs";
-import Navigation from './Navigation'
+import { Logo, ProfileImg } from "../images/imgs";
+import Navigation from "./Navigation";
 import Search from "./Search";
+import useGetLoggeduser from "../hooks/get-logged-user";
 
 const Navbar = () => {
   const [openSearch, setOpenSearch] = useState(false);
+  const loggedUser = useGetLoggeduser()
+  
   return (
     <nav className="absolute top-0 left-0 z-50">
       <div className="container">
@@ -34,22 +37,31 @@ const Navbar = () => {
               src={SearchIcon}
               alt="search"
               className="w-6 mr-10 cursor-pointer"
-              onClick={()=> setOpenSearch(true)}
+              onClick={() => setOpenSearch(true)}
             />
             <Link to="/wishlist">
-              <img src={Heart} alt="bell" className="w-6 cursor-pointer" />
+              <img src={Heart} alt="wishlist" className="w-6 cursor-pointer" />
             </Link>
           </div>
-          <Link
-            className="ml-auto bg-mainColor rounded-lg xl:px-5 xl:py-2 py-1 px-3 text-white text-base font-medium capitalize"
-            to="/user/login"
-          >
-            sign in
-          </Link>
+          {loggedUser ? (
+            <Link
+              className="ml-auto"
+              to={`/profile/${loggedUser?.slug}`}
+            >
+              <img width={40} height={40} className="rounded-full" src={ProfileImg} alt="user-profile"/>
+            </Link>
+          ) : (
+            <Link
+              className="ml-auto bg-mainColor rounded-lg xl:px-5 xl:py-2 py-1 px-3 text-white text-base font-medium capitalize"
+              to="/user/login"
+            >
+              sign in
+            </Link>
+          )}
         </div>
       </div>
-      <Search openSearch={openSearch} setOpenSearch={setOpenSearch}/>
-      <Navigation setOpenSearch={setOpenSearch}/>
+      <Search openSearch={openSearch} setOpenSearch={setOpenSearch} />
+      <Navigation setOpenSearch={setOpenSearch} />
     </nav>
   );
 };

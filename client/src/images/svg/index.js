@@ -1,5 +1,6 @@
-import Play from "./play.svg";
+import Details from "./details.svg";
 import Plus from "./plus.svg";
+import Close from "./close.svg";
 import Facebook from "./facebook.svg";
 import Twitter from "./twitter.svg";
 import Instagram from "./instagram.svg";
@@ -9,6 +10,7 @@ import Edit from './edit.svg'
 import Heart from './heart.svg'
 import Home from './home.svg'
 import Menu from './menu.svg' 
+import Check from './check.svg'
 
 
-export {Play, Plus, Facebook, Twitter, Instagram, SearchIcon, Bell, Edit, Heart, Home, Menu}
+export {Plus, Details, Close, Facebook, Twitter, Instagram, SearchIcon, Check, Bell, Edit, Heart, Home, Menu}

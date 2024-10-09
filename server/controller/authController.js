@@ -44,9 +44,8 @@ exports.signup = asyncHandler(async (req, res, next)=>{
 exports.signin = asyncHandler(async(req, res, next)=>{
   const {email, password} = req.body
   const user = await User.findOne({email})
-  if(!user ||  !(await bcrypt.compare(password, user.password))){
+  if(!user ||  !(await bcrypt.compare(password, user.password)))
     return next(new ApiError("invalid email or password", 400))
-  }
   //generate token
   const token = jwt.sign({userId: user._id}, process.env.SECRET_KEY)
   res.status(200).json({data: user, token})
@@ -59,7 +58,7 @@ exports.protect = asyncHandler(async (req, res, next)=>{
     token = req.headers.authorization.split(" ")[1]
   }
   if(!token){
-    return next(new ApiError("You are not logged, please login", 401))
+    return next(new ApiError("You are not logged in, please login", 401))
   }
   //2) verify token
   const decoded = jwt.verify(token, process.env.SECRET_KEY)

@@ -1,50 +1,38 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../utils/Navbar";
-import axios from "axios";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import Slider from "../components/Slider";
+import { getSingleMovie } from "../store/movies/singleMovieSlice";
+import { useSelector, useDispatch } from "react-redux";
+import ScrollToTop from '../utils/ScrollToTop' 
 
 const DetailsPage = () => {
-  const [item, setItem] = useState([]);
-  const [itemId, setItemId] = useState("");
+  const [movie, setMovie] = useState({});
 
-  // get item id 
   const { id } = useParams();
+  
+  const dispatch = useDispatch()
+  const movieData = useSelector(state=> state.singleMovie.data)
 
   useEffect(() => {
     if (id) {
-      setItemId(id);
-      console.log(item)
+      dispatch(getSingleMovie(id))
     }
   }, [id]);
 
-  // get item data 
-  const getData = async () => {
-    // get item details
-    await axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=2d1450a575e2dcacc1d2e19b768fdfdf&language=en-US`
-      )
-      .then((data) => {
-        setItem(data.data);
-      });
-  };
-
-  useEffect(() => {
-    if (itemId) {
-      getData();
+  useEffect(()=>{
+    if(movieData){
+      if(movieData.data){
+       setMovie(movieData.data)
+      }
     }
-  }, [itemId]);
+  },[movieData])
 
-  useEffect(() => {
-    if (item) {
-      console.log(item);
-    }
-  }, [item]);
+
 
   return (
     <div className="page landing">
-      <Slider data={[item]} internal={true}/>
+      <ScrollToTop/>
+      <Slider data={[movie]} internal={true}/>
     </div>
   );
 };

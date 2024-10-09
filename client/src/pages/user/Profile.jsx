@@ -1,49 +1,105 @@
-import { Link } from 'react-router-dom'
-import { ProfileImg, ProfileBgImg } from '../../images/imgs'
-import { Edit } from '../../images/svg'
+import { Link } from "react-router-dom";
+import { ProfileImg, ProfileBgImg } from "../../images/imgs";
+import { Edit } from "../../images/svg";
+import Card from "../../components/Card";
+import useGetLoggeduser from "../../hooks/get-logged-user";
+import ProtectRoutes from "../../hooks/protect-routes";
 
-export const Profile = () => {
+const Profile = () => {
+  const loggedUser = useGetLoggeduser();
+  ProtectRoutes();
+
   return (
-    <div className='w-screen min-h-screen flex justify-center items-center' style={{
+    <div
+      className="w-screen min-h-screen flex justify-center items-center"
+      style={{
         background: `url('${ProfileBgImg}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
-    }}>
-        <div className='flex max-lg:flex-col xl:w-[80%] w-full mt-16 rounded-md bg-black/85'>
-            <div className='xl:w-[30%] w-full max-lg:h-[500px] bg-slate-900/30 rounded-tl-md rounded-bl-md flex justify-center items-center'>
-                <div className='flex flex-col items-center gap-5'>
-                    <img className='rounded-full' width={120} height={120} src={ProfileImg} alt='profile'/>
-                    <h4 className='text-white text-xl font-meduim'>Omar Abd Elaziz</h4>
-                    <div className='flex items-center'>
-                        <span className='text-white text-lg font-medium'>Joined Oct 2024</span>
-                    </div>
-                    <img className='cursor-pointer' width={25} height={25} src={Edit} alt='edit'/>
-                </div>
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="flex max-lg:flex-col xl:w-[80%] w-full mt-16 rounded-md bg-black/85">
+        <div className="xl:w-[30%] w-full max-lg:h-[500px] bg-slate-900/30 rounded-tl-md rounded-bl-md flex justify-center items-center">
+          <div className="flex flex-col items-center gap-5">
+            <img
+              className="rounded-full"
+              width={120}
+              height={120}
+              src={ProfileImg}
+              alt="profile"
+            />
+            <h4 className="text-white text-xl capitalize font-meduim">
+              {loggedUser?.fullName}
+            </h4>
+            <div className="flex items-center">
+              <span className="text-white text-lg font-medium">
+                Joined {loggedUser?.createdAt.split('T')[0]}
+              </span>
             </div>
-            <div className='py-5 px-5 min-h-[500px] xl:px-10'>
-            <h3 className='text-white text-xl font-semibold'>Information</h3>
-            <div className='flex flex-col gap-4 mt-5'>
-               <div className='flex items-center'>
-                <h5 className='text-xl text-slate-300 font-semibold'>Email: </h5>
-                <p className='text-white text-lg ml-3'>omarabdelazizmohamed408@gmail.com</p>
-               </div>
-               <div className='flex items-center'>
-                <h5 className='text-xl text-slate-300 font-semibold'>Phone Number: </h5>
-                <p className='text-white text-lg ml-3'>01096757644</p>
-               </div>
-            </div>
-            <div className='flex items-center mt-5'>
-            <h3 className='text-white text-xl font-semibold my-5'>My List</h3>
-            <Link className='inline-block ml-auto text-mainColor hover:underline' to={""}>See All</Link>
-            </div>
-            <div className='flex items-center gap-4 max-lg:flex-col'>
-                <div className='xl:w-[220px] w-[90%] h-[300px] bg-orange-500 rounded-md'>ss</div>
-                <div className='xl:w-[220px] w-[90%] h-[300px] bg-orange-500 rounded-md'>ss</div>
-                <div className='xl:w-[220px] w-[90%] h-[300px] bg-orange-500 rounded-md'>ss</div>
-            </div>
-            </div>
+            <img
+              className="cursor-pointer"
+              width={25}
+              height={25}
+              src={Edit}
+              alt="edit"
+            />
+            <button
+              className="text-white text-base px-3 py-1 bg-red-700 rounded-md font-medium cursor-pointer"
+              onClick={() => {
+                localStorage.removeItem("token");
+                window.location = "/";
+              }}
+            >
+              Logout
+            </button>
+          </div>
         </div>
+        <div className="py-5 px-5 w-full min-h-[500px] xl:px-10">
+          <h3 className="text-white text-xl font-semibold">Information</h3>
+          <div className="flex flex-col gap-4 mt-5">
+            <div className="flex items-center">
+              <h5 className="text-xl text-slate-300 font-semibold">Email: </h5>
+              <p className="text-white text-lg ml-3">{loggedUser?.email}</p>
+            </div>
+            <div className="flex items-center">
+              <h5 className="text-xl text-slate-300 font-semibold">
+                User ID:{" "}
+              </h5>
+              <p className="text-white text-lg ml-3">{loggedUser?._id}</p>
+            </div>
+          </div>
+          <div className="w-full flex items-center mt-5">
+            <h3 className="text-white text-xl font-semibold my-5">My List</h3>
+            <Link
+              className="text-mainColor inline-block ml-auto hover:underline"
+              to={"/wishlist"}
+            >
+              See All
+            </Link>
+          </div>
+          <div className="w-full flex items-center gap-4 max-lg:flex-col">
+            {loggedUser ? (
+              loggedUser.wishlist.length > 0 ? (
+                loggedUser.wishlist.slice(0, 3).map((mov) => (
+                  <div
+                    key={mov.id}
+                    className="xl:w-[195px] w-[90%] h-fit rounded-md"
+                  >
+                    <Card data={mov} />
+                  </div>
+                ))
+              ):(
+                <p className="text-white font-medium">No Movies Added To Wishlist</p>
+              ) 
+            ) : (
+              null
+            )}
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
+
+export default Profile;

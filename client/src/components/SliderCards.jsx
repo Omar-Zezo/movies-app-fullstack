@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
 
-const SliderCards = ({ title, data }) => {
+const SliderCards = ({ title, data, userWishlist }) => {
   return (
     <div className="mt-[100px] slider-cards">
       <div className="container">
@@ -43,7 +43,7 @@ const SliderCards = ({ title, data }) => {
               data.length > 0 ? (
                 data.map((item) => (
                   <SwiperSlide key={item.id}>
-                    <Card data={item}/>
+                    <Card data={item} userWishlist={userWishlist}/>
                   </SwiperSlide>
                 ))
               ):null

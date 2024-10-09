@@ -1,18 +1,27 @@
 import {SignupBgImg} from '../../images/imgs/index'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
-import {useDispatch, useSelector} from "react-redux"
-import { signup } from '../../redux/actions/authActions'
+import {useSelector} from "react-redux"
+import { useEffect } from 'react'
+import useGetLoggeduser from '../../hooks/get-logged-user'
+import useAuth from '../../hooks/auth-user'
+import { signup } from '../../store/users/signupSlice'
+
 
 const Signup = () => {
   const {register,handleSubmit, watch ,formState: { errors }} = useForm()
 
-  const dispatch = useDispatch()
-  const signupData = useSelector(state=> state.authReducer.signupUser)
+  const navigate = useNavigate()
 
-  const onSubmit = (data)=> dispatch(signup(data))
+  const signupData = useSelector(state=> state.signup)
+  const loggedUser = useGetLoggeduser()
+  const onSubmit = useAuth(signupData, signup)
 
-  console.log(signupData)
+  useEffect(()=>{
+    if(loggedUser){
+      navigate(`/profile/${loggedUser?.slug}`)
+    }
+  }, [loggedUser])
 
   return (
     <div style={{

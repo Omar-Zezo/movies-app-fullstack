@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
     wishlist: {
-        type: [String],
+        type: [{}],
         default: []
     },
 }, {timestamps: true})
