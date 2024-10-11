@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LoggedUserContext } from "../App";
 
-const useCheckInWishlist = (userWishlist, id) => {
+const useCheckInWishlist = (id) => {
   const [inWishlist, setInWishlist] = useState(false);
+  const loggedUser = useContext(LoggedUserContext)
+
   useEffect(() => {
-    userWishlist?.map((item) => {
+    setInWishlist(false)
+    loggedUser?.wishlist.map((item) => {
         if (item.id === id) {
           setInWishlist(true);
         }
     });
-  }, [userWishlist]);
+  }, [loggedUser?.wishlist, id]);
 
   return {inWishlist, setInWishlist};
 };

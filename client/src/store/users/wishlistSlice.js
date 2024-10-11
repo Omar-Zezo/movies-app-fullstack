@@ -2,6 +2,13 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import { getLoggedUser } from "./loggeduserSlice"
 import { baseURL } from "../../api"
 
+
+const initialState = {
+    data: [],
+    loading: false,
+    error: null
+}
+
 // add to wishlist
 export const addToWishlist = createAsyncThunk('wishlist/addToWishlist', async({data, token}, thunkApi)=>{
     const {rejectWithValue, dispatch} = thunkApi
@@ -28,11 +35,6 @@ export const removeFromWishlist = createAsyncThunk('wishlist/removeFromWishlist'
     }
 })
 
-const initialState = {
-    data: [],
-    loading: false,
-    error: null
-}
 
 const wishlistSlice = createSlice({
     name: "signup",

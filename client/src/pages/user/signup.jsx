@@ -2,20 +2,20 @@ import {SignupBgImg} from '../../images/imgs/index'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import {useSelector} from "react-redux"
-import { useEffect } from 'react'
-import useGetLoggeduser from '../../hooks/get-logged-user'
+import { useContext, useEffect } from 'react'
 import useAuth from '../../hooks/auth-user'
 import { signup } from '../../store/users/signupSlice'
+import { LoggedUserContext } from '../../App'
 
 
 const Signup = () => {
   const {register,handleSubmit, watch ,formState: { errors }} = useForm()
-
   const navigate = useNavigate()
 
   const signupData = useSelector(state=> state.signup)
-  const loggedUser = useGetLoggeduser()
   const onSubmit = useAuth(signupData, signup)
+
+  const loggedUser = useContext(LoggedUserContext);
 
   useEffect(()=>{
     if(loggedUser){

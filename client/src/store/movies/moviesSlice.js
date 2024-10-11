@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_KEY, TMDB } from "../../api";
 
 // get popular movies
-export const getPopular = createAsyncThunk('movies/getPopular', async (page, thunkApi)=>{
+export const getMoviesByCategory = createAsyncThunk('movies/getMoviesByCategory', async ({page, category}, thunkApi)=>{
     const {rejectWithValue} = thunkApi
     try{
-        return await TMDB.get(`movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`)
+        return await TMDB.get(`movie${category}?api_key=${API_KEY}&language=en-US&page=${page}`)
     }catch(err){
         rejectWithValue(err.response)
     }
@@ -19,18 +19,18 @@ const initialState = {
     error: null,
 }
 
-const popularMoviesSlice = createSlice({
+const MoviesSlice = createSlice({
     name: "movies",
     initialState,
     extraReducers: (builder)=>{
-        builder.addCase(getPopular.pending, (state)=>{
+        builder.addCase(getMoviesByCategory.pending, (state)=>{
          state.loading = true
         })
-        builder.addCase(getPopular.fulfilled, (state, action)=>{
+        builder.addCase(getMoviesByCategory.fulfilled, (state, action)=>{
          state.loading = false
          state.data = action.payload
         })
-        builder.addCase(getPopular.rejected, (state, action)=>{
+        builder.addCase(getMoviesByCategory.rejected, (state, action)=>{
          state.loading = false
          state.error = action.payload
         })
@@ -38,4 +38,4 @@ const popularMoviesSlice = createSlice({
 })
 
 
-export default popularMoviesSlice.reducer
+export default MoviesSlice.reducer

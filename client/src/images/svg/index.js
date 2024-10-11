@@ -11,6 +11,7 @@ import Heart from './heart.svg'
 import Home from './home.svg'
 import Menu from './menu.svg' 
 import Check from './check.svg'
+import Trash from './trash.svg'
 
 
-export {Plus, Details, Close, Facebook, Twitter, Instagram, SearchIcon, Check, Bell, Edit, Heart, Home, Menu}
+export {Plus, Details, Trash, Close, Facebook, Twitter, Instagram, SearchIcon, Check, Bell, Edit, Heart, Home, Menu}

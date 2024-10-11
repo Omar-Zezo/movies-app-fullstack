@@ -7,12 +7,13 @@ const Pagination = ({pageNumber, pageCount, handlePageClick}) => {
     <>
     <ReactPaginate
       breakLabel="..."
-      nextLabel="Next >"
+      nextLabel="Next"
       forcePage={pageNumber !== 0 ? pageNumber -1: 0}
       onPageChange={handlePageClick}
       pageRangeDisplayed={5}
       pageCount={pageCount <= 500 ? pageCount : 500}
-      previousLabel="< Previous"
+      previousLabel="Previous"
+      breakClassName="text-white"
       renderOnZeroPageCount={null}
       className="flex justify-center xl:gap-4 gap-2 mt-10"
       pageLinkClassName="text-white min-w-8 h-8 px-1 flex items-center justify-center rounded-sm bg-mainColor"

@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { ProfileImg, ProfileBgImg } from "../../images/imgs";
 import { Edit } from "../../images/svg";
 import Card from "../../components/Card";
-import useGetLoggeduser from "../../hooks/get-logged-user";
 import ProtectRoutes from "../../hooks/protect-routes";
+import { LoggedUserContext } from "../../App";
+import { useContext } from "react";
 
-const Profile = () => {
-  const loggedUser = useGetLoggeduser();
+const Profile = ({removeFromList}) => {
   ProtectRoutes();
+  const loggedUser = useContext(LoggedUserContext);
 
   return (
     <div
@@ -86,7 +87,7 @@ const Profile = () => {
                     key={mov.id}
                     className="xl:w-[195px] w-[90%] h-fit rounded-md"
                   >
-                    <Card data={mov} />
+                    <Card data={mov} wCard={true} removeFromList={removeFromList}/>
                   </div>
                 ))
               ):(

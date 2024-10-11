@@ -2,7 +2,7 @@ import {LoginBgImg} from '../../images/imgs/index'
 import { useForm } from "react-hook-form"
 
 const VerificationCode = () => {
-  const {register,handleSubmit, watch ,formState: { errors }} = useForm()
+  const {register,handleSubmit, formState: { errors }} = useForm()
 
   const onSubmit = (data) => console.log(data)
   return (

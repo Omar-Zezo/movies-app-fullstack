@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit" 
-import popular from './movies/popularMoviesSlice'
+import movies from './movies/moviesSlice'
 import topRated from './movies/topRatedMoviesSlice'
 import upcoming from './movies/upcomingMoviesSlice'
 import singleMovie from './movies/singleMovieSlice'
@@ -9,9 +9,10 @@ import signin from './users/signinSlice'
 import loggeduser from './users/loggeduserSlice'
 import wishlist from './users/wishlistSlice'
 
+
 const store = configureStore({
     reducer: {
-      popular,
+      movies,
       topRated,
       upcoming,
       searchMovie,
@@ -19,7 +20,7 @@ const store = configureStore({
       signup,
       signin,
       loggeduser,
-      wishlist
+      wishlist,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

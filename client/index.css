@@ -54,6 +54,11 @@ body {
     width: 95%;
     margin: auto;
   }
+  .page-cover {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
   .btn {
     display: inline-flex;
     align-items: center;
@@ -97,5 +102,10 @@ body {
     background-color: rgba(238, 238, 238, 0.5);
     position: absolute;
     bottom: -180px;
+  }
+  .bottom-nav .active, nav .active {
+    background-color: #1679AB;
+    padding: 3px 6px;
+    border-radius: 5px;
   }
 }/*# sourceMappingURL=index.css.map */

@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import {useDispatch} from "react-redux"
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { getMoviesByCategory } from "../store/movies/moviesSlice";
 
-const useFetchMoviesCategory = (moviesData, dispatchMethod) => {
+const useFetchMoviesCategory = (category) => {
     const [moviesList, setMoviesList] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
     const [pageCount, setPageCount] = useState(null)
     
     const dispatch = useDispatch()
+    const moviesData = useSelector((state) => state.movies.data);
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const page = searchParams.get("page")
+    const {pathname} = useLocation()
 
     const navigate = useNavigate()
 
@@ -21,11 +24,11 @@ const useFetchMoviesCategory = (moviesData, dispatchMethod) => {
     useEffect(()=>{
         if(page){
             setPageNumber(page)
-            dispatch(dispatchMethod(page))
+            dispatch(getMoviesByCategory({page, category:pathname}))
         }else{
-            dispatch(dispatchMethod(pageNumber))
+            dispatch(getMoviesByCategory({page:pageNumber, category: category ? category : pathname}))
         }
-    },[page])
+    },[page, pathname])
 
 
     

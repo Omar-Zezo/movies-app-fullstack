@@ -1,26 +1,27 @@
 import {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {toast} from "react-toastify"
 import { addToWishlist, removeFromWishlist } from "../store/users/wishlistSlice";
+import {toast} from "react-toastify"
 
 const useWishlist = () => {
-  const addToWishlistData = useSelector((state) => state.wishlist);
-  const errorMsg = (msg) => toast.error(msg);
+  const {error} = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
   const addToList = (data)=> dispatch(addToWishlist({data, token}))
   const removeFromList = (data)=> dispatch(removeFromWishlist({data, token}))
 
+  const errorMsg = (msg)=> toast.error(msg)
+
   useEffect(() => {
-    if (addToWishlistData) {
-      if (addToWishlistData.error) {
-        if (addToWishlistData.error.data) {
-            errorMsg(addToWishlistData.error.data.message);
+    if (error) {
+      if (error) {
+        if (error.data) {
+          errorMsg(error.data.message)
         }
       }
     }
-  }, [addToWishlistData]);
+  }, [error]);
 
   return {addToList, removeFromList}
 };

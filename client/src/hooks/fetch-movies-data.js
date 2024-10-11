@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPopular } from "../store/movies/popularMoviesSlice";
+import { getMoviesByCategory } from "../store/movies/moviesSlice";
 import { getTopRated } from "../store/movies/topRatedMoviesSlice";
 import { getUpcoming } from "../store/movies/upcomingMoviesSlice";
 import {useSelector, useDispatch} from "react-redux"
@@ -11,37 +11,37 @@ const useFetchMoviesData = () => {
     const [upcomingList, setUpcomingList] = useState([])
   
     const topRatedData = useSelector(state=>state.topRated)
-    const popularData = useSelector(state=> state.popular)
+    const popularData = useSelector(state=> state.movies)
     const upcomingData = useSelector(state=>state.upcoming)
   
     const dispatch = useDispatch()
   
     useEffect(()=>{
       dispatch(getTopRated(1))
-      dispatch(getPopular(1))
+      dispatch(getMoviesByCategory({page:1, category: "/popular"}))
       dispatch(getUpcoming(1))
     },[])
   
   
     useEffect(()=>{
-      if(topRatedData){
-        if(topRatedData.data){
-          if(topRatedData.data.data){
-            setPopularList(topRatedData.data.data.results)
-          }
-        }
-      }
-    },[topRatedData])
-  
-    useEffect(()=>{
       if(popularData){
         if(popularData.data){
           if(popularData.data.data){
-            setTopRatedList(popularData.data.data.results)
+            setPopularList(popularData.data.data.results)
           }
         }
       }
     },[popularData])
+  
+    useEffect(()=>{
+      if(topRatedData){
+        if(topRatedData.data){
+          if(topRatedData.data.data){
+            setTopRatedList(topRatedData.data.data.results)
+          }
+        }
+      }
+    },[topRatedData])
   
     useEffect(()=>{
       if(upcomingData){

@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form"
 
@@ -12,7 +11,6 @@ const useAuth = (authData, dispatchMethod) => {
   
     const dispatch = useDispatch();
   
-    const navigate = useNavigate();
   
     useEffect(() => {
       if (authData) {
@@ -25,7 +23,7 @@ const useAuth = (authData, dispatchMethod) => {
           if (authData.data.data) {
             localStorage.setItem("token", authData.data.data.token);
             reset()
-            navigate("/");
+            window.location = "/"
           }
         }
       }

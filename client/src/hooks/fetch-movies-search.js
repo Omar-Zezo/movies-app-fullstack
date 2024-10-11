@@ -11,7 +11,7 @@ const useFetchMoviesSearch = () => {
     const dispatch = useDispatch()
     const searchData = useSelector(state => state.searchMovie.data)
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const keyword = searchParams.get("keyword")
     const page = searchParams.get("page")
 

@@ -11,8 +11,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper/modules";
 
-
-const SliderCards = ({ title, data, userWishlist }) => {
+const SliderCards = ({ title, moviesList }) => {
   return (
     <div className="mt-[100px] slider-cards">
       <div className="container">
@@ -40,10 +39,10 @@ const SliderCards = ({ title, data, userWishlist }) => {
             }}
           >
             {
-              data.length > 0 ? (
-                data.map((item) => (
+              moviesList?.length > 0 ? (
+                moviesList.map((item) => (
                   <SwiperSlide key={item.id}>
-                    <Card data={item} userWishlist={userWishlist}/>
+                    <Card data={item} wCard={false} />
                   </SwiperSlide>
                 ))
               ):null

@@ -13,6 +13,7 @@ body {
     padding: 0;
 }
 
+
 .slider {
     .slider-wraper {
         .swiper {
@@ -70,6 +71,11 @@ body {
         width: 95%;
         margin: auto;
     }
+    .page-cover{
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
     .btn {
         display: inline-flex;
         align-items: center;
@@ -115,4 +121,10 @@ body {
         position: absolute;
         bottom: -180px;
     }
+    .bottom-nav .active, nav .active{
+        background-color: #1679AB;
+        padding: 3px 6px;
+        border-radius: 5px;
+    }
 }
+

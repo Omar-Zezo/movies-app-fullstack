@@ -10,10 +10,9 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
-import useWishlist from "../hooks/wishlist";
 
-const Slider = ({ data, internal, userWishlist }) => {
-  const {addToList, removeFromList} = useWishlist()
+const Slider = ({ data }) => {
+  
   return (
     <>
       <div className="h-[750px] slider">
@@ -33,7 +32,7 @@ const Slider = ({ data, internal, userWishlist }) => {
             {data.length > 0
               ? data.map((trend) => (
                   <SwiperSlide key={trend.id}>
-                    <Slide data={trend} internal={internal} userWishlist={userWishlist} addToList={addToList} removeFromList={removeFromList}/>
+                    <Slide data={trend}/>
                   </SwiperSlide>
                 ))
               : null}
