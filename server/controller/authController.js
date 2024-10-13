@@ -1,29 +1,10 @@
 const asyncHandler = require("express-async-handler")
 const slugify = require("slugify")
-const sharp = require("sharp");
 const bcrypt = require("bcrypt")
-const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const ApiError = require("../utils/apiError")
 const User = require("../models/userModel");
-const { uploadImgMiddleware } = require("../middlewares/uploadImgMiddleware");
 
-
-exports.uploadProfileImg = uploadImgMiddleware("profileImg")
-
-
-// image processing
-exports.resizeImage = asyncHandler(async(req, res, next)=>{
-    if(req.file){
-      const filename = `user-${uuidv4()}-${Date.now()}.jpeg`
-      const img = await sharp(req.file.buffer).resize(100, 100).jpeg({quality: 90}).toFile(`uploads/users/${filename}`)
-      if(!img)
-        next(new ApiError("Error", 400))
-      else
-      req.body.profileImg = filename
-    }
-    next()  
-})
 
 
 exports.signup = asyncHandler(async (req, res, next)=>{

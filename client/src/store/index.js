@@ -9,6 +9,7 @@ import signup from './users/signupSlice'
 import signin from './users/signinSlice'
 import loggeduser from './users/loggeduserSlice'
 import wishlist from './users/wishlistSlice'
+import profileImg from './users/profileImgSlice'
 
 
 const store = configureStore({
@@ -23,6 +24,7 @@ const store = configureStore({
       signin,
       loggeduser,
       wishlist,
+      profileImg
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

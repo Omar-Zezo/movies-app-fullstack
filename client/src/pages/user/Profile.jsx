@@ -4,12 +4,25 @@ import { Edit, EditImg, ImagePlus, Trash } from "../../images/svg";
 import Card from "../../components/Card";
 import ProtectRoutes from "../../hooks/protect-routes";
 import { LoggedUserContext } from "../../App";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeProfileImg,
+  updateProfileImg,
+} from "../../store/users/profileImgSlice";
 
-const Profile = ({removeFromList}) => {
-  const [imgMenu, setImgMenu] = useState(false)
+const Profile = ({ removeFromList }) => {
+  const [imgMenu, setImgMenu] = useState(false);
   ProtectRoutes();
   const loggedUser = useContext(LoggedUserContext);
+  const token = localStorage.getItem("token");
+
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.profileImg);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div
@@ -20,49 +33,75 @@ const Profile = ({removeFromList}) => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      onClick={()=> setImgMenu(false)}
+      onClick={() => setImgMenu(false)}
     >
       <div className="flex max-lg:flex-col xl:w-[80%] w-full mt-16 rounded-md bg-black/85">
         <div className="xl:w-[30%] w-full max-lg:h-[500px] bg-slate-900/30 rounded-tl-md rounded-bl-md flex justify-center items-center">
           <div className="flex flex-col items-center gap-5">
             <div className="w-full relative">
-            <img
-              className="rounded-full"
-              width={120}
-              height={120}
-              src={ProfileImg}
-              alt="profile"
-            />
-            <div className="absolute left-5 bottom-0 size-6 rounded-full cursor-pointer bg-mainColor p-1 flex items-center justify-center">
-            <img width={25} src={EditImg} alt="edit-img" 
-            onClick={(e)=>{
-              setImgMenu(!imgMenu)
-              e.stopPropagation()
-            }}
-            />
-            </div>
-            <div className={`absolute left-5 bottom-[-55px] rounded-md border ${imgMenu ? 'flex flex-col items-start gap-1': 'hidden'} border-white/50 w-[140px] px-2 py-1 bg-blue-950`}>
-              <button className="relative w-full">
-                <input type="file" id="img-uplod" className="absolute left-0 top-0 size-0"
-                onChange={(e)=> console.log(e.target.value)}
+              <img
+                className="rounded-full"
+                width={120}
+                height={120}
+                src={
+                  loggedUser?.profileImg
+                    ? `http://localhost:8000/users/${loggedUser?.profileImg}`
+                    : ProfileImg
+                }
+                alt="profile"
+              />
+              <div className="absolute left-5 bottom-0 size-6 rounded-full cursor-pointer bg-mainColor p-1 flex items-center justify-center">
+                <img
+                  width={25}
+                  src={EditImg}
+                  alt="edit-img"
+                  onClick={(e) => {
+                    setImgMenu(!imgMenu);
+                    e.stopPropagation();
+                  }}
                 />
-                <label htmlFor="img-uplod" className="w-full flex items-center gap-1 cursor-pointer">
-                <img width={20} src={ImagePlus} alt="change-img"/>
-                <p className="text-white text-sm">Upload Image</p>
-                </label>
-              </button>
-              <button className="text-white text-sm flex items-center gap-1">
-                <img width={20} src={Trash} alt="remove-img"/>
-                Remove Image
-              </button>
-            </div>
+              </div>
+              <div
+                className={`absolute left-5 bottom-[-67px] rounded-md border ${
+                  imgMenu ? "flex flex-col items-start gap-2" : "hidden"
+                } border-white/50 w-[140px] p-2 bg-blue-950`}
+              >
+                <button className="relative w-full">
+                  <input
+                    type="file"
+                    id="img-uplod"
+                    className="absolute left-0 top-0 size-0"
+                    onChange={(e) => {
+                      const formData = new FormData();
+                      formData.append("profileImg", e.target.files[0]);
+                      dispatch(updateProfileImg({ formData, token }));
+                    }}
+                  />
+                  <label
+                    htmlFor="img-uplod"
+                    className="w-full flex items-center gap-1 cursor-pointer"
+                  >
+                    <img width={20} src={ImagePlus} alt="change-img" />
+                    <p className="text-white text-sm">Upload Image</p>
+                  </label>
+                </button>
+                <button
+                  className="text-white text-sm flex items-center gap-1"
+                  onClick={() => {
+                    dispatch(removeProfileImg(token));
+                  }}
+                >
+                  <img width={20} src={Trash} alt="remove-img" />
+                  Remove Image
+                </button>
+              </div>
             </div>
             <h4 className="text-white text-xl capitalize font-meduim">
               {loggedUser?.fullName}
             </h4>
             <div className="flex items-center">
               <span className="text-white text-lg font-medium">
-                Joined {loggedUser?.createdAt.split('T')[0]}
+                Joined {loggedUser?.createdAt.split("T")[0]}
               </span>
             </div>
             <img
@@ -114,15 +153,19 @@ const Profile = ({removeFromList}) => {
                     key={mov.id}
                     className="xl:w-[195px] w-[90%] h-fit rounded-md"
                   >
-                    <Card data={mov} wCard={true} removeFromList={removeFromList}/>
+                    <Card
+                      data={mov}
+                      wCard={true}
+                      removeFromList={removeFromList}
+                    />
                   </div>
                 ))
-              ):(
-                <p className="text-white font-medium">No Movies Added To Wishlist</p>
-              ) 
-            ) : (
-              null
-            )}
+              ) : (
+                <p className="text-white font-medium">
+                  No Movies Added To Wishlist
+                </p>
+              )
+            ) : null}
           </div>
         </div>
       </div>

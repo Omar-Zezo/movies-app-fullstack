@@ -44,12 +44,12 @@ const Navbar = () => {
             </Link>
           </div>
           {loggedUser ? (
-            <Link className="ml-auto" to={`/profile/${loggedUser?.slug}`}>
+            <Link className="ml-auto size-12 rounded-full border-2 border-white" to={`/profile/${loggedUser?.slug}`}>
               <img
-                width={40}
-                height={40}
+                width={45}
+                height={45}
                 className="rounded-full"
-                src={ProfileImg}
+                src={loggedUser?.profileImg ? `http://localhost:8000/users/${loggedUser?.profileImg}`: ProfileImg}
                 alt="user-profile"
               />
             </Link>
