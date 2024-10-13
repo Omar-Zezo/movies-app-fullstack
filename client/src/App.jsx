@@ -14,6 +14,7 @@ import ResetPassword from "./pages/user/ResetPassword.jsx";
 import useGetLoggeduser from "./hooks/get-logged-user.js";
 import MoviesCategory from "./pages/MoviesCategory.jsx";
 import { createContext } from "react";
+import Page404 from "./pages/Page404.jsx";
 
 // Global state for logged user
 export const LoggedUserContext = createContext()
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
         element: <Home/>,
       },
       {
-        path: "popular",
+        path: "discover",
         element: <MoviesCategory/>,
       },
       {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "*",
+    element: <Page404/>
+  }
 ]);
 
   return (

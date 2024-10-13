@@ -13,7 +13,7 @@ const {removeFromList} = useContext(WishlistContext);
     <div className={`w-full h-full relative rounded-lg border-4 ${setRatingColor(Math.ceil((data.vote_average * 1000) / 100))}`}>
       {
         inWishlist ? (
-          <div className={`absolute z-50 bottom-5 left-[50%] translate-x-[-50%] size-fit py-1 pr-2 pl-1 rounded-lg cursor-pointer ${wCard ? "bg-red-600":"bg-red-600/50"} flex items-center justify-center`}
+          <div className={`absolute z-50 bottom-5 left-[50%] translate-x-[-50%] size-fit py-1 pr-2 pl-1 rounded-lg cursor-pointer bg-red-600 flex items-center justify-center`}
           onClick={() =>{
             removeFromList({
               id: data.id,

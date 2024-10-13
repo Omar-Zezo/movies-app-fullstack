@@ -18,7 +18,7 @@ const useFetchMoviesData = () => {
   
     useEffect(()=>{
       dispatch(getTopRated(1))
-      dispatch(getMoviesByCategory({page:1, category: "/popular"}))
+      dispatch(getMoviesByCategory({page:1}))
       dispatch(getUpcoming(1))
     },[])
   

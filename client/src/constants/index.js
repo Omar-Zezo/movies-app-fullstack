@@ -2,7 +2,7 @@ import { Heart, Home } from "../images/svg"
 
 const navLinks = [
     {name:"Home", path: "/"},
-    {name:"Discover", path: "/popular"},
+    {name:"Discover", path: "/discover"},
     {name:"Upcoming", path: "/upcoming"},
     {name:"Top Rated", path: "/top_rated"},
 ]

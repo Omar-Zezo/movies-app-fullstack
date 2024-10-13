@@ -1,5 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit" 
 import movies from './movies/moviesSlice'
+import genre from './movies/genresSlice'
 import topRated from './movies/topRatedMoviesSlice'
 import upcoming from './movies/upcomingMoviesSlice'
 import singleMovie from './movies/singleMovieSlice'
@@ -13,6 +14,7 @@ import wishlist from './users/wishlistSlice'
 const store = configureStore({
     reducer: {
       movies,
+      genre,
       topRated,
       upcoming,
       searchMovie,

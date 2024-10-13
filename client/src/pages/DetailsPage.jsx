@@ -26,6 +26,8 @@ const DetailsPage = () => {
     }
   }, [id]);
 
+  console.log(movie)
+
   useEffect(()=>{
     if(movieData){
       if(movieData.data){
