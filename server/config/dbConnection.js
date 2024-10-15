@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const dbConnection = ()=>{
-    mongoose.connect("mongodb://0.0.0.0:27017/movies").then(()=>{
+    mongoose.connect(process.env.DB_URI).then(()=>{
         console.log("database connected")
     }).catch((err)=>{
         console.log(err)

@@ -29,6 +29,11 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 app.use("/api", userRoute)
 app.use("/api", authRoute)
 
+app.use(express.static(path.join(__dirname, "views")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/views/index.html"))
+);
+
 app.all("*", (req, res, next)=>{
     return next(new ApiError("This route is not found", 404))
 })
