@@ -10,6 +10,8 @@ exports.signupValidator = [
     check("bio").isLength({max: 300}).withMessage("Bio mustn't be more 300 character"),
     check("email").notEmpty().withMessage("Email is required")
     .isEmail().withMessage("invalid email address"),
+    check("phoneNumber").notEmpty().withMessage("phone number is required")
+    .isMobilePhone("ar-EG").withMessage("only Egyptian numbers are accepted"),
     check("password").notEmpty().withMessage("password is required")
     .isLength({min: 6}).withMessage("password must be more than 6 character").custom((val, {req})=>{
         if(req.body.confirmPassword !== val){

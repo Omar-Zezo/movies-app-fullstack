@@ -62,3 +62,15 @@ exports.getLoggedUser = asyncHandler(async (req, res, next)=>{
   const loggedUserData = await User.findById(decoded.userId)
   res.status(200).json({data: loggedUserData})
 })
+
+exports.updateLoggedUser = asyncHandler(async (req, res, next)=>{
+  let token;
+  if(req.headers){
+      token = req.headers.authorization.split(" ")[1]
+  }
+  //1) verify token
+  const decoded = jwt.verify(token, process.env.SECRET_KEY)
+  //2) get logged user
+  const user = await User.findOneAndUpdate({_id: decoded.userId}, {fullName: req.body.fullName, phoneNumber: req.body.phoneNumber}, {new: true})
+  res.status(201).json({data: user})
+})
