@@ -64,6 +64,7 @@ exports.getLoggedUser = asyncHandler(async (req, res, next)=>{
 })
 
 exports.updateLoggedUser = asyncHandler(async (req, res, next)=>{
+  const slug = slugify(req.body.fullName)
   let token;
   if(req.headers){
       token = req.headers.authorization.split(" ")[1]
@@ -71,6 +72,26 @@ exports.updateLoggedUser = asyncHandler(async (req, res, next)=>{
   //1) verify token
   const decoded = jwt.verify(token, process.env.SECRET_KEY)
   //2) get logged user
-  const user = await User.findOneAndUpdate({_id: decoded.userId}, {fullName: req.body.fullName, phoneNumber: req.body.phoneNumber}, {new: true})
+  const user = await User.findOneAndUpdate({_id: decoded.userId}, {fullName: req.body.fullName, phoneNumber: req.body.phoneNumber, slug}, {new: true})
   res.status(201).json({data: user})
+})
+
+exports.changePassword = asyncHandler(async (req, res, next)=>{
+  let token;
+  if(req.headers){
+      token = req.headers.authorization.split(" ")[1]
+  }
+  //1) verify token
+  const decoded = jwt.verify(token, process.env.SECRET_KEY)
+  //2) get logged user
+  const user = await User.findById({_id: decoded.userId})
+  const comparePassword = await bcrypt.compare(req.body.currentPassword, user.password)
+  if(!comparePassword){
+    return next(new ApiError("The current password is incorrect", 401))
+  }
+  else{
+    const hashedPassword = await bcrypt.hash(req.body.newPassword, 12)
+    const updatedUser = await User.findOneAndUpdate({_id: decoded.userId}, {password : hashedPassword}, {new: true})
+    res.status(201).json({data: updatedUser})
+  }
 })

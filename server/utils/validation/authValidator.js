@@ -15,7 +15,7 @@ exports.signupValidator = [
     check("password").notEmpty().withMessage("password is required")
     .isLength({min: 6}).withMessage("password must be more than 6 character").custom((val, {req})=>{
         if(req.body.confirmPassword !== val){
-            throw new Error("password and password confirmation not match")
+            throw new Error("password and password confirm don't match")
         }
         return true
     }),
@@ -28,5 +28,16 @@ exports.signinValidator = [
     check("email").notEmpty().withMessage("Email is required")
     .isEmail().withMessage("invalid email address"),
     check("password").notEmpty().withMessage("password is required"),
+    validatorMiddleware
+]
+
+exports.changePasswordValidator = [
+    check("currentPassword").notEmpty().withMessage("current password is required"),
+    check("newPassword").notEmpty().withMessage("new password is required").custom((val, {req})=>{
+        if(req.body.confirmPassword !== val){
+            throw new Error("password and password confirm don't match")
+        }
+        return true
+    }),
     validatorMiddleware
 ]
