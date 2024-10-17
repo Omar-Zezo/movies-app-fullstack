@@ -15,7 +15,6 @@ export const getUpcoming = createAsyncThunk('movies/getUpcoming', async (page, t
 
 const initialState = {
     data: [],
-    loading: false,
     error: null,
 }
 
@@ -24,14 +23,12 @@ const upcomingMoviesSlice = createSlice({
     initialState,
     extraReducers: (builder)=>{
         builder.addCase(getUpcoming.pending, (state)=>{
-         state.loading = true
+         state.error = false
         })
         builder.addCase(getUpcoming.fulfilled, (state, action)=>{
-         state.loading = false
          state.data = action.payload
         })
         builder.addCase(getUpcoming.rejected, (state, action)=>{
-         state.loading = false
          state.error = action.payload
         })
      }

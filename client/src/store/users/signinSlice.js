@@ -14,7 +14,6 @@ export const signin = createAsyncThunk('auth/signin', async(data, thunkApi)=>{
 
 const initialState = {
     data: [],
-    loading: false,
     error: null
 }
 
@@ -24,14 +23,11 @@ const signinSlice = createSlice({
     extraReducers: (builder)=>{
        builder.addCase(signin.pending, (state)=>{
         state.error = null
-        state.loading = true
        })
        builder.addCase(signin.fulfilled, (state, action)=>{
-        state.loading = false
         state.data = action.payload
        })
        builder.addCase(signin.rejected, (state, action)=>{
-        state.loading = false
         state.error = action.payload
        })
     }

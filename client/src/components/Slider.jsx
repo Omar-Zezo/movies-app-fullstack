@@ -50,12 +50,6 @@ const Slider = ({ data }) => {
             <img className="size-9" src={Instagram} alt="instagram" />
           </a>
         </div>
-        {/* switch buttons */}
-        <div className="switch">
-          <i className="fas fa-circle active" data-switch="block-1"></i>
-          <i className="fas fa-circle" data-switch="block-3"></i>
-          <i className="fas fa-circle" data-switch="block-2"></i>
-        </div>
       </div>
     </>
   );

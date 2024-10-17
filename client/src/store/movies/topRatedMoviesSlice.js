@@ -15,7 +15,6 @@ export const getTopRated = createAsyncThunk('movies/getTopRated', async (page, t
 
 const initialState = {
     data: [],
-    loading: false,
     error: null,
 }
 
@@ -24,14 +23,12 @@ const topRatedMoviesSlice = createSlice({
     initialState,
     extraReducers: (builder)=>{
         builder.addCase(getTopRated.pending, (state)=>{
-         state.loading = true
+         state.error = false
         })
         builder.addCase(getTopRated.fulfilled, (state, action)=>{
-         state.loading = false
          state.data = action.payload
         })
         builder.addCase(getTopRated.rejected, (state, action)=>{
-         state.loading = false
          state.error = action.payload
         })
      }

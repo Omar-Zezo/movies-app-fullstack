@@ -17,7 +17,7 @@ const Slide = ({ data }) => {
       }}
     >
       <div className="w-full h-full absolute top-0 left-0 z-10 block bg-bgOverlay">
-        <div className="w-full absolute top-[70%] translate-y-[-70%] text-slate-100 pl-8">
+        <div className="w-full absolute top-[70%] translate-y-[-70%] text-slate-100 pl-5">
           <h2 className="w-[85%] text-3xl xl:text-5xl tracking-wider uppercase m-0 p-0">
             {data.title}
           </h2>

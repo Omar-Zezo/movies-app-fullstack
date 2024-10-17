@@ -14,7 +14,6 @@ export const searchMovie = createAsyncThunk('movies/searchMovie', async ({keywor
 
 const initialState = {
     data: [],
-    loading: false,
     error: null,
 }
 
@@ -24,15 +23,12 @@ const singleMovieSlice = createSlice({
     extraReducers: (builder)=>{
         builder.addCase(searchMovie.pending, (state)=>{
          state.error = false   
-         state.loading = true
          state.data = []
         })
         builder.addCase(searchMovie.fulfilled, (state, action)=>{
-         state.loading = false
          state.data = action.payload
         })
         builder.addCase(searchMovie.rejected, (state, action)=>{
-         state.loading = false
          state.error = action.payload
         })
      }

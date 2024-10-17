@@ -2,11 +2,10 @@ import Slider from "../components/Slider";
 import SliderCards from "../components/SliderCards";
 import Ask from "../components/Ask";
 import Subscription from "../components/Subscription";
-import useFetchMoviesData from "../hooks/fetch-movies-data";
-
+import useFetchMoviesHome from '../hooks/fetch-movies-home'
 
 const Home = () => {
-const {popularList, topRatedList, upcomingList} = useFetchMoviesData()
+const {popularList, topRatedList, upcomingList} = useFetchMoviesHome()
   
   return (
     <div className="landing">

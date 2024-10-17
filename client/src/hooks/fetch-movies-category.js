@@ -1,54 +1,47 @@
-import { useEffect, useState } from "react";
-import {useDispatch, useSelector} from "react-redux"
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { getMoviesByCategory } from "../store/movies/moviesSlice";
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { getMoviesCategory } from '../store/movies/moviesCategorySlice'
 
-const useFetchMoviesCategory = (queryStr) => {
+const useFetchMoviesCategory = () => {
     const [moviesList, setMoviesList] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
     const [pageCount, setPageCount] = useState(null)
-
     
-    const dispatch = useDispatch()
-    const moviesData = useSelector((state) => state.movies.data);
 
     const [searchParams] = useSearchParams()
     const page = searchParams.get("page")
-    const sortByQuery = searchParams.get("sort_by")
-    const yearQuery = searchParams.get("year")
-    const genreQuery = searchParams.get("with_genres")
-    const languageQuery = searchParams.get("with_original_language")
     
-    const searchQuery = `sort_by=${sortByQuery}&year=${+yearQuery}${languageQuery !== "ar" ? `&vote_count.gte=300`:''}&with_original_language=${languageQuery ? languageQuery: "en"}${genreQuery ? `&with_genres=${genreQuery}`:''}`
-
+    const dispatch = useDispatch()
+    const {data} = useSelector(state=> state.moviesCategory)
 
     const navigate = useNavigate()
+    const {pathname} = useLocation()
+
 
     const handlePageClick = (event) => {
-        navigate(`?${searchQuery}&page=${event.selected+1}`)
+        navigate(`?page=${event.selected+1}`)
     };
-
-
+    
     useEffect(()=>{
         if(page){
             setPageNumber(page)
-            dispatch(getMoviesByCategory({page, queryStr: searchQuery}))
+            dispatch(getMoviesCategory({page, category: pathname.slice(1)}))
         }else{
-            dispatch(getMoviesByCategory({page:pageNumber, queryStr: searchQuery}))
+            dispatch(getMoviesCategory({page:pageNumber, category: pathname.slice(1)}))
         }
-    },[queryStr, page, sortByQuery, yearQuery, genreQuery])
-
-
+    },[page, pathname])
+    
     useEffect(()=>{
-        if(moviesData){
-            if(moviesData.data){
-                setMoviesList(moviesData.data.results)
-                setPageCount(moviesData.data.total_pages)
+        if(data){
+            if(data.data){
+                setMoviesList(data.data.results)
+                setPageCount(data.data.total_pages)
             }
         }
-    },[moviesData])
+    },[data])
 
-    return {moviesList, pageNumber, pageCount, handlePageClick, yearQuery, sortByQuery, genreQuery, languageQuery}
+    return {moviesList, handlePageClick, pageNumber, pageCount}
 }
 
 export default useFetchMoviesCategory

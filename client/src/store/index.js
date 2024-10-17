@@ -1,5 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit" 
-import movies from './movies/moviesSlice'
+import discover from './movies/discoverSlice'
+import moviesCategory from './movies/moviesCategorySlice'
 import genre from './movies/genresSlice'
 import topRated from './movies/topRatedMoviesSlice'
 import upcoming from './movies/upcomingMoviesSlice'
@@ -10,11 +11,13 @@ import signin from './users/signinSlice'
 import loggeduser from './users/loggeduserSlice'
 import wishlist from './users/wishlistSlice'
 import profileImg from './users/profileImgSlice'
+import changePassword from './users/changePasswordSlice'
 
 
 const store = configureStore({
     reducer: {
-      movies,
+      discover,
+      moviesCategory,
       genre,
       topRated,
       upcoming,
@@ -23,6 +26,7 @@ const store = configureStore({
       signup,
       signin,
       loggeduser,
+      changePassword,
       wishlist,
       profileImg
     },

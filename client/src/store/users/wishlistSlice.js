@@ -5,7 +5,6 @@ import { baseURL } from "../../api"
 
 const initialState = {
     data: [],
-    loading: false,
     error: null
 }
 
@@ -43,27 +42,21 @@ const wishlistSlice = createSlice({
         //add
        builder.addCase(addToWishlist.pending, (state)=>{
         state.error = null
-        state.loading = true
        })
        builder.addCase(addToWishlist.fulfilled, (state, action)=>{
-        state.loading = false
         state.data = action.payload
        })
        builder.addCase(addToWishlist.rejected, (state, action)=>{
-        state.loading = false
         state.error = action.payload
        })
        // remove
        builder.addCase(removeFromWishlist.pending, (state)=>{
         state.error = null
-        state.loading = true
        })
        builder.addCase(removeFromWishlist.fulfilled, (state, action)=>{
-        state.loading = false
         state.data = action.payload
        })
        builder.addCase(removeFromWishlist.rejected, (state, action)=>{
-        state.loading = false
         state.error = action.payload
        })
     }

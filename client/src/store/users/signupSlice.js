@@ -16,7 +16,6 @@ export const signup = createAsyncThunk(
 
 const initialState = {
   data: [],
-  loading: false,
   error: null,
 };
 
@@ -26,14 +25,11 @@ const signupSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(signup.pending, (state) => {
       state.error = null;
-      state.loading = true;
     });
     builder.addCase(signup.fulfilled, (state, action) => {
-      state.loading = false;
       state.data = action.payload;
     });
     builder.addCase(signup.rejected, (state, action) => {
-      state.loading = false;
       state.error = action.payload;
     });
   },

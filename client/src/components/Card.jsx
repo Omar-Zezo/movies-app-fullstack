@@ -13,7 +13,7 @@ const {removeFromList} = useContext(WishlistContext);
     <div className={`w-full h-full relative rounded-lg border-4 ${setRatingColor(Math.ceil((data.vote_average * 1000) / 100))}`}>
       {
         inWishlist ? (
-          <div className={`absolute z-50 bottom-5 left-[50%] translate-x-[-50%] size-fit py-1 pr-2 pl-1 rounded-lg cursor-pointer bg-red-600 flex items-center justify-center`}
+          <div className={`absolute z-10 bottom-5 left-[50%] translate-x-[-50%] w-[84px] h-[28px] py-1 pr-2 pl-1 rounded-lg cursor-pointer bg-red-600 flex items-center justify-center`}
           onClick={() =>{
             removeFromList({
               id: data.id,
@@ -36,7 +36,7 @@ const {removeFromList} = useContext(WishlistContext);
         ):null
       }
         <img
-        className={`object-contain object-center size-full rounded-sm ${wCard === false && inWishlist ? 'opacity-10':'opacity-none'}`}
+        className={`object-cover object-center size-full rounded-sm ${wCard === false && inWishlist ? 'opacity-30':'opacity-none'}`}
           loading="lazy"
           src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
           alt=""

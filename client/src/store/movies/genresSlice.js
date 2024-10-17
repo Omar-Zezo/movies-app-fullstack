@@ -14,7 +14,6 @@ export const getMoviesGenre = createAsyncThunk('movies/getMoviesGenre', async (_
 
 const initialState = {
     data: [],
-    loading: false,
     error: null,
 }
 
@@ -23,14 +22,12 @@ const genresSlice = createSlice({
     initialState,
     extraReducers: (builder)=>{
         builder.addCase(getMoviesGenre.pending, (state)=>{
-         state.loading = true
+         state.error = null
         })
         builder.addCase(getMoviesGenre.fulfilled, (state, action)=>{
-         state.loading = false
          state.data = action.payload
         })
         builder.addCase(getMoviesGenre.rejected, (state, action)=>{
-         state.loading = false
          state.error = action.payload
         })
      }

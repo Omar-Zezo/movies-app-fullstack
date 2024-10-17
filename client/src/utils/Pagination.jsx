@@ -11,7 +11,7 @@ const Pagination = ({pageNumber, pageCount, handlePageClick}) => {
       forcePage={pageNumber !== 0 ? pageNumber -1: 0}
       onPageChange={handlePageClick}
       pageRangeDisplayed={5}
-      pageCount={pageCount <= 500 ? pageCount : 500}
+      pageCount={pageCount}
       previousLabel="Previous"
       breakClassName="text-white"
       renderOnZeroPageCount={null}

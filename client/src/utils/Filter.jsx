@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getMoviesGenre } from "../store/movies/genresSlice";
-import { FilterImg } from "../images/svg";
+import { Close, FilterImg } from "../images/svg";
 const Filter = ({
   setSortBy,
   setYear,
@@ -14,6 +14,7 @@ const Filter = ({
   languageQuery
 }) => {
   const [moviesGener, setMoviesGener] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const genreMoviesData = useSelector((state) => state.genre.data);
@@ -37,11 +38,17 @@ const Filter = ({
   ];
 
   return (
-    <div className="pl-16 flex items-center gap-5 mb-5">
-      <div className="flex items-center gap-2">
+    <div className="pl-16 mb-5 flex items-center gap-5">
+      <div className="flex items-center gap-2"
+      onClick={()=>{
+        setShowFilter(!showFilter)
+      }}
+      >
         <img width={25} src={FilterImg} alt="filter"/>
-      <h3 className="text-white text-xl font-medium">Filter: </h3>
+        <h3 className="text-white text-xl font-medium">Filter: </h3>
       </div>
+      <div className={`flex max-md:flex-col max-md:pt-20 items-center gap-5 max-md:bg-zinc-900 max-md:fixed z-50 ${showFilter ? 'left-0': 'left-[-50%]'} duration-75 top-0 max-md:w-[50%] max-md:h-full`}>
+        <img className="md:hidden mb-10" width={20} src={Close} alt="close-filter" onClick={()=> setShowFilter(false)}/>
       <div>
         {/* sort by */}
         <select
@@ -52,7 +59,7 @@ const Filter = ({
             navigate(
               `?sort_by=${e.target.value}&year=${yearQuery}${
                 genreQuery ? `&with_genres=${genreQuery}` : ``
-              }&with_original_language=${languageQuery}`
+              }&with_original_language=${languageQuery ? languageQuery: "en"}`
             );
           }}
         >
@@ -63,7 +70,6 @@ const Filter = ({
       </div>
       <div className="">
         {/* year */}
-        {/* <label className="text-white font-medium">Year: </label> */}
         <select
           value={yearQuery}
           className="bg-zinc-800 text-white px-5 py-2 text-center"
@@ -72,7 +78,7 @@ const Filter = ({
             navigate(
               `?sort_by=${sortByQuery}&year=${e.target.value}${
                 genreQuery ? `&with_genres=${genreQuery}` : ``
-              }&with_original_language=${languageQuery}`
+              }&with_original_language=${languageQuery ? languageQuery: "en"}`
             );
           }}
         >
@@ -84,14 +90,13 @@ const Filter = ({
       </div>
       <div>
         {/* genre */}
-        {/* <label className="text-white font-medium">Genres: </label> */}
         <select
           value={genreQuery}
           className="bg-zinc-800 text-white px-5 py-2 text-center"
           onChange={(e) => {
             setGenre(e.target.value);
             navigate(
-              `?sort_by=${sortByQuery}&year=${yearQuery}&with_genres=${e.target.value}&with_original_language=${languageQuery}`
+              `?sort_by=${sortByQuery}&year=${yearQuery}&with_genres=${e.target.value}&with_original_language=${languageQuery ? languageQuery: "en"}`
             );
           }}
         >
@@ -105,7 +110,6 @@ const Filter = ({
       </div>
       <div>
         {/* language */}
-        {/* <label className="text-white font-medium">Genres: </label> */}
         <select
           value={languageQuery}
           className="bg-zinc-800 text-white px-5 py-2 text-center"
@@ -116,10 +120,11 @@ const Filter = ({
             );
           }}
         >
-          <option value={""}>Language</option>
-          <option value={"en"}>EN</option>
-          <option value={"ar"}>Ar</option>
+          {/* <option value={""}>Language</option> */}
+          <option value={"en"}>English</option>
+          <option value={"ar"}>Arabic</option>
         </select>
+      </div>
       </div>
     </div>
   );

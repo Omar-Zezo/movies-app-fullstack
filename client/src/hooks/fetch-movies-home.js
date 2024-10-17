@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import { getMoviesByCategory } from "../store/movies/moviesSlice";
+import { getMoviesWithFilter } from "../store/movies/discoverSlice";
 import { getTopRated } from "../store/movies/topRatedMoviesSlice";
 import { getUpcoming } from "../store/movies/upcomingMoviesSlice";
 import {useSelector, useDispatch} from "react-redux"
 
 
-const useFetchMoviesData = () => {
+const useFetchMoviesHome = () => {
     const [popularList, setPopularList] = useState([])
     const [topRatedList, setTopRatedList] = useState([])
     const [upcomingList, setUpcomingList] = useState([])
   
     const topRatedData = useSelector(state=>state.topRated)
-    const popularData = useSelector(state=> state.movies)
+    const popularData = useSelector(state=> state.discover)
     const upcomingData = useSelector(state=>state.upcoming)
   
     const dispatch = useDispatch()
-  
+    
     useEffect(()=>{
       dispatch(getTopRated(1))
-      dispatch(getMoviesByCategory({page:1}))
+      dispatch(getMoviesWithFilter({page:1}))
       dispatch(getUpcoming(1))
     },[])
   
@@ -56,4 +56,4 @@ const useFetchMoviesData = () => {
     return {popularList, topRatedList, upcomingList}
 }
 
-export default useFetchMoviesData
+export default useFetchMoviesHome

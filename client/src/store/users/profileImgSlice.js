@@ -5,7 +5,6 @@ import { baseURL } from "../../api"
 
 const initialState = {
     data: [],
-    loading: false,
     error: null
 }
 
@@ -43,27 +42,21 @@ const profileImgSlice = createSlice({
         //add
        builder.addCase(updateProfileImg.pending, (state)=>{
         state.error = null
-        state.loading = true
        })
        builder.addCase(updateProfileImg.fulfilled, (state, action)=>{
-        state.loading = false
         state.data = action.payload
        })
        builder.addCase(updateProfileImg.rejected, (state, action)=>{
-        state.loading = false
         state.error = action.payload
        })
        // remove
        builder.addCase(removeProfileImg.pending, (state)=>{
         state.error = null
-        state.loading = true
        })
        builder.addCase(removeProfileImg.fulfilled, (state, action)=>{
-        state.loading = false
         state.data = action.payload
        })
        builder.addCase(removeProfileImg.rejected, (state, action)=>{
-        state.loading = false
         state.error = action.payload
        })
     }

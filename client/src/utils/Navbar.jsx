@@ -6,6 +6,7 @@ import { Logo, ProfileImg } from "../images/imgs";
 import Navigation from "./Navigation";
 import Search from "./Search";
 import { LoggedUserContext } from "../App";
+import { serverURL } from "../api";
 
 const Navbar = () => {
   const [openSearch, setOpenSearch] = useState(false);
@@ -17,7 +18,7 @@ const Navbar = () => {
         <div className="w-full h-[70px] flex items-center opacity-90">
           <div className="w-[15%] max-md:w-[33%] xl:pl-8 py-4 px-1 inline-block">
             <a href="/">
-              <img src={Logo} alt="logo" className="w-full" />
+              <img width={160} src={Logo} alt="logo" className="w-full" />
             </a>
           </div>
           <ul className="w-[50%] max-xl:hidden flex p-10 justify-center items-center mx-auto">
@@ -49,7 +50,7 @@ const Navbar = () => {
                 width={45}
                 height={45}
                 className="rounded-full"
-                src={loggedUser?.profileImg ? `http://localhost:8000/users/${loggedUser?.profileImg}`: ProfileImg}
+                src={loggedUser?.profileImg ? `${serverURL}/users/${loggedUser?.profileImg}`: ProfileImg}
                 alt="user-profile"
               />
             </Link>
