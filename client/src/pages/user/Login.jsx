@@ -3,9 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signin } from "../../store/users/signinSlice";
 import { useContext, useEffect } from "react";
-import useAuth from "../../hooks/auth-user";
-import { useSelector } from "react-redux";
 import { LoggedUserContext } from "../../App";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const loggedUser = useContext(LoggedUserContext);
@@ -14,8 +13,9 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const loginData = useSelector((state) => state.signin);
-  const onSubmit = useAuth(loginData, signin)
+
+  const dispatch = useDispatch()
+  const onSubmit = (data) => dispatch(signin(data))
 
   const navigate = useNavigate();
 

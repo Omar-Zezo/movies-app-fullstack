@@ -26,6 +26,7 @@ const changePasswordSlice = createSlice({
     initialState,
     extraReducers: (builder)=>{
        builder.addCase(changePassword.pending, (state)=>{
+        state.data = null
         state.error = null
        })
        builder.addCase(changePassword.fulfilled, (state, action)=>{

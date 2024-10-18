@@ -12,53 +12,20 @@ import ForgotPassword from "./pages/user/ForgotPassword.jsx";
 import VerificationCode from "./pages/user/VerificationCode.jsx";
 import ResetPassword from "./pages/user/ResetPassword.jsx";
 import useGetLoggeduser from "./hooks/get-logged-user.js";
-import { createContext, useEffect } from "react";
+import { createContext } from "react";
 import Page404 from "./pages/Page404.jsx";
 import MoviesDiscover from "./pages/MoviesDiscover.jsx";
 import MoviesCategory from "./pages/MoviesCategory.jsx";
 import Notify from "./utils/Notify.jsx";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import useNotifications from "./hooks/notifications.js";
+
 
 // Global state for logged user data
 export const LoggedUserContext = createContext();
 
 function App() {
+  useNotifications()
   const loggedUser = useGetLoggeduser();
-  const { updateUser, error } = useSelector((state) => state.loggeduser);
-  const changePasswordData = useSelector(state=> state.changePassword)
-
-
-  const successMsg = (msg) => toast.success(msg);
-  const errorMsg = (msg) => toast.error(msg);
-
-  // Handling user info update notification
-  useEffect(() => {
-    if (updateUser) {
-      successMsg("User info has been updated");
-    }
-    if (error) {
-      if (error.data) {
-        errorMsg(error.data.message);
-      }
-    }
-  }, [updateUser, error]);
-
-
-  useEffect(()=>{
-    if(changePasswordData){
-      if(changePasswordData.error){
-        if(changePasswordData.error.data){
-          errorMsg(changePasswordData.error.data.message)
-        }
-      }
-      if(changePasswordData.data){
-        if(changePasswordData.data.data){
-          successMsg("Password has been updated");
-        }
-      }
-    }
-  },[changePasswordData])
 
   const router = createBrowserRouter([
     {

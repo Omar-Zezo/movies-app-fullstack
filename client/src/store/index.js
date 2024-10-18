@@ -12,6 +12,7 @@ import loggeduser from './users/loggeduserSlice'
 import wishlist from './users/wishlistSlice'
 import profileImg from './users/profileImgSlice'
 import changePassword from './users/changePasswordSlice'
+import subscribe from './users/subscribeSlice'
 
 
 const store = configureStore({
@@ -25,6 +26,7 @@ const store = configureStore({
       singleMovie,
       signup,
       signin,
+      subscribe,
       loggeduser,
       changePassword,
       wishlist,

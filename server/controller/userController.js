@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const ApiError = require("../utils/apiError")
 const User = require("../models/userModel");
+const Subscribe = require("../models/subscribeModel");
 const { uploadImgMiddleware } = require("../middlewares/uploadImgMiddleware");
 
 exports.uploadProfileImg = uploadImgMiddleware("profileImg")
@@ -68,7 +69,6 @@ exports.removeFromWishlist = asyncHandler(async (req, res, next)=>{
     res.status(200).json({data: updatedUser})
 })
 
-//update user profile image
 exports.updateProfileImg = asyncHandler(async (req, res, next)=>{
     const profileImg = req.body.profileImg
     let token;
@@ -82,7 +82,6 @@ exports.updateProfileImg = asyncHandler(async (req, res, next)=>{
     res.status(201).json({data: user})
 })
 
-//remove user profile image
 exports.removeProfileImg = asyncHandler(async (req, res, next)=>{
     let token;
     if(req.headers){
@@ -93,4 +92,17 @@ exports.removeProfileImg = asyncHandler(async (req, res, next)=>{
     //2) get logged user
     const user = await User.findOneAndUpdate({_id: decoded.userId}, {profileImg:""}, {new: true})
     res.status(201).json({data: user})
+})
+
+exports.userSubscribe = asyncHandler(async (req, res, next)=>{
+    //check if the email is exists
+    const email = await Subscribe.findOne({email: req.body.email})
+    if(email)
+    return next(new ApiError("email is already exists", 400))
+    // add email to list
+    const doc = await Subscribe.create(req.body)
+    if(!doc)
+        return next(new ApiError("An error occurred", 400))
+    else
+        res.status(201).json({data: doc})
 })

@@ -7,6 +7,7 @@ const cors = require('cors')
 
 const userRoute = require("./routes/userRoute")
 const authRoute = require("./routes/authRoute")
+const subscribeRoute = require("./routes/subscribeRoute")
 
 const dbConnection = require("./config/dbConnection")
 const ApiError = require("./utils/apiError")
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 //App Routes
 app.use("/api", userRoute)
 app.use("/api", authRoute)
+app.use("/api", subscribeRoute)
 
 app.use(express.static(path.join(__dirname, "views")));
 app.get("*", (req, res) =>
