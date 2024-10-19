@@ -13,7 +13,7 @@ exports.signup = asyncHandler(async (req, res, next)=>{
     //1) check if userEmail exist  before
     const userEmail = await User.findOne({email: req.body.email})
     if(userEmail)
-    return next(new ApiError("email is exsite before", 400))
+    return next(new ApiError("Email already exists", 400))
 
     const user = await User.create(req.body)
     // Generate token

@@ -75,12 +75,12 @@ const Login = () => {
             >
               New to Movrec? Sign up now.
             </Link>
-            <Link
+            {/* <Link
               to="/user/forgot-password"
               className="text-slate-100 text-center text-base hover:text-zinc-500 hover:underline"
             >
               Forgot Password?
-            </Link>
+            </Link> */}
           </form>
         </div>
       </div>

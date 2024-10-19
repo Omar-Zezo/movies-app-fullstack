@@ -24,6 +24,7 @@ const subscribeSlice = createSlice({
     initialState,
     extraReducers: (builder)=>{
        builder.addCase(subscribe.pending, (state)=>{
+        state.data = null
         state.error = null
        })
        builder.addCase(subscribe.fulfilled, (state, action)=>{

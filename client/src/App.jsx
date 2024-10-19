@@ -8,9 +8,6 @@ import Wishlist from "./pages/Wishlist.jsx";
 import AuthLayout from "./pages/authLayout.jsx";
 import Login from "./pages/user/Login.jsx";
 import Signup from "./pages/user/signup.jsx";
-import ForgotPassword from "./pages/user/ForgotPassword.jsx";
-import VerificationCode from "./pages/user/VerificationCode.jsx";
-import ResetPassword from "./pages/user/ResetPassword.jsx";
 import useGetLoggeduser from "./hooks/get-logged-user.js";
 import { createContext } from "react";
 import Page404 from "./pages/Page404.jsx";
@@ -77,19 +74,7 @@ function App() {
         {
           path: "signup",
           element: <Signup />,
-        },
-        {
-          path: "forgot-password",
-          element: <ForgotPassword />,
-        },
-        {
-          path: "verification-code",
-          element: <VerificationCode />,
-        },
-        {
-          path: "reset-password",
-          element: <ResetPassword />,
-        },
+        }
       ],
     },
     {

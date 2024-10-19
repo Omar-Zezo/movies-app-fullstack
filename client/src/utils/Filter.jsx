@@ -38,7 +38,7 @@ const Filter = ({
   ];
 
   return (
-    <div className="pl-16 mb-5 flex items-center gap-5">
+    <div className="xl:pl-16 pl-8 mb-5 flex items-center gap-3">
       <div className="flex items-center gap-2"
       onClick={()=>{
         setShowFilter(!showFilter)

@@ -14,11 +14,11 @@ import { Navigation } from "swiper/modules";
 const SliderCards = ({ title, moviesList }) => {
   return (
     <div className="mt-[100px] slider-cards">
-      <div className="container">
+      <div className="">
         <div className="slider-cards-wraper">
           <h2 className="text-white py-10 pr-0 pl-10 text-3xl font-medium">{title}</h2>
           <Swiper
-            className="mySwiper py-0 px-10"
+            className="mySwiper"
             modules={[Navigation]}
             navigation={true}
             slidesPerView={3}
@@ -26,7 +26,7 @@ const SliderCards = ({ title, moviesList }) => {
             breakpoints={{
               350: {
                 slidesPerView: 2,
-                spaceBetween: 20,
+                spaceBetween: 15,
               },
               768: {
                 slidesPerView: 4,

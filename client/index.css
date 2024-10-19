@@ -37,24 +37,30 @@ body {
 
 /* slider cards */
 .slider-cards{
-    .container{
-        .slider-cards-wraper{
-            .swiper{
-                padding: 0 40px;
-                .swiper-button-prev{
-                    color: #FFF;
-                    left: 0;
-                    &::after{
-                       font-size: 30px;
-                    }
+    .slider-cards-wraper{
+        .swiper{
+            padding: 0 40px;
+            @media screen and (max-width: 767px){
+                padding: 0 10px;
+            }
+            .swiper-button-prev, .swiper-button-next{
+                @media screen and (max-width: 767px){
+                    display: none;
                 }
-                .swiper-button-next{
-                    right: 0;
-                    color: #FFF;
-                    &::after{
-                        font-size: 30px;
-                     }
+            }
+            .swiper-button-prev{
+                color: #FFF;
+                left: 0;
+                &::after{
+                   font-size: 30px;
                 }
+            }
+            .swiper-button-next{
+                right: 0;
+                color: #FFF;
+                &::after{
+                    font-size: 30px;
+                 }
             }
         }
     }
