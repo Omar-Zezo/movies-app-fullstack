@@ -53,7 +53,7 @@ const Profile = ({ removeFromList }) => {
                   height={120}
                   src={
                     loggedUser?.profileImg
-                      ? `${serverURL}/users/${loggedUser?.profileImg}`
+                      ? `${serverURL}/${loggedUser?.profileImg}`
                       : ProfileImg
                   }
                   alt="profile"
