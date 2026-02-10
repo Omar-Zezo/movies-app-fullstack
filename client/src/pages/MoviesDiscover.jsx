@@ -16,10 +16,6 @@ const MoviesDiscover = () => {
 
 
   useEffect(()=>{
-    console.log(year)
-    console.log(sortBy)
-    console.log(genre)
-    console.log(language)
     setQueryStr(`sort_by=${sortBy}&year=${year}&with_genres=${genre}&with_original_language=${language}`)
   },[year, sortBy, genre, language])
   
